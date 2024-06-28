@@ -7,15 +7,19 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'transform-shadow': 'transform, shadow'
+      }
+    },
   },
   darkMode: "class",
   plugins: [
     nextui({
       prefix: "nextui", // prefix for themes variables
       addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-      defaultTheme: "dark", // default theme from the themes object
-      defaultExtendTheme: "dark", // default theme to extend on custom themes
+      defaultTheme: "dark", //"dark", // default theme from the themes object
+      defaultExtendTheme: "dark", // "dark", // default theme to extend on custom themes
       layout: {}, // common layout tokens (applied to all themes)
       themes: {
         light: {
