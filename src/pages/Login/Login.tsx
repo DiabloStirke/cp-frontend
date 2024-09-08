@@ -1,13 +1,20 @@
 import { Button, CardBody, Tooltip } from "@nextui-org/react";
 import { FollowingCard, CopyrightDisclaimer } from "@/components";
-import { Form } from "react-router-dom";
+import { Form, useRouteError } from "react-router-dom";
 import "./Login.css";
 import { useRef } from "react";
+import { Error } from "@/types";
+
+function getErrMsg(error: Error | null): string {
+  if (error === null) return "Sorry, an unexpected error has occurred."; 
+
+  console.log(error); 
+  return "Sorry, an unexpected error has occurred.";
+}
 
 function Login() {
   const deception = useRef( Math.random() < 0.1 );
-  
-  console.log(deception.current);
+  const error = useRouteError() as ({ statusText?: string, message?: string } | null); 
   return (
     <>
       <div
@@ -36,6 +43,13 @@ function Login() {
             alt="Diablo Strike"
             className="mx-auto rounded-full border-1 border-solid p-1 border-white mb-10"
           />
+          {error && (
+            <div className="text-center text-red-500 mb-5">
+              <p>
+                <i>{getErrMsg(error)}</i>
+              </p>
+            </div>
+          )}
           <div className="mx-auto w-fit">
             <Form method="post" action="/login">
               <Button

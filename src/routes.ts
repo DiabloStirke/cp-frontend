@@ -1,11 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import {
-  loader as rootLoader,
-  action as rootAction,
-} from "./layouts/Root";
 import Error from "./pages/Error";
-import Layout from "./Layout";
-import Login, { loginAction } from "./pages/Login";
+import Layout, { loader as rootLoader } from "./Layout";
+import Login, { loginAction, discordAuth } from "./pages/Login";
 import Test, { action as testAction } from "./pages/Test/Test";
 const routes = createBrowserRouter([
   {
@@ -13,7 +9,6 @@ const routes = createBrowserRouter([
     Component: Layout,
     ErrorBoundary: Error,
     loader: rootLoader,
-    action: rootAction,
     children: [
       {
         ErrorBoundary: Error,
@@ -41,8 +36,13 @@ const routes = createBrowserRouter([
   {
     path: "/login",
     Component: Login,
+    ErrorBoundary: Login,
     action: loginAction,
   },
+  {
+    path: "/discord-authorized",
+    loader: discordAuth,
+  }
 ]);
 
 export default routes;

@@ -5,9 +5,11 @@ import {
   NavbarItem,
   Link as NextLink,
 } from "@nextui-org/react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 
 export default function Navbar() {
+  const userInfo = useLoaderData();
+  console.log(userInfo)
   const navigationItems = [
     {
       title: "Test",
